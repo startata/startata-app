@@ -19,31 +19,37 @@ void main() {
     usecase = GetPersonsUsecase(repository);
   });
 
-  final tPersons = PersonEntity(
-    id: '123AB',
-    name: 'José da Silva',
-    email: 'jose@mail.com',
-    photoUrl: 'https://randomuser.me/api/portraits/lego/2.jpg',
-    team: TeamEntity(id: '132', index: 1, label: 'dev'),
-  );
+  final tPersons = [
+    PersonEntity(
+      id: '123AB',
+      name: 'José da Silva',
+      email: 'jose@mail.com',
+      photoUrl: 'https://randomuser.me/api/portraits/lego/2.jpg',
+      team: TeamEntity(id: '132', index: 1, label: 'dev'),
+    ),
+    PersonEntity(
+      id: '12ABGI',
+      name: 'Maria da Silva',
+      email: 'jose@mail.com',
+      photoUrl: 'https://randomuser.me/api/portraits/lego/3.jpg',
+      team: TeamEntity(id: '145', index: 2, label: 'vendas'),
+    ),
+  ];
 
   final tNoParams = NoParams();
 
-  test('deve retornar a lista de PersonEntity do repositório', () async {
+  test('should return a list of PersonEntity from repository', () async {
     when(repository.getPersons)
-        .thenAnswer((_) async => Right<Failure, PersonEntity>(tPersons));
+        .thenAnswer((_) async => Right<Failure, List<PersonEntity>>(tPersons));
     final result = await usecase(tNoParams);
     expect(result, Right(tPersons));
     verify(() => repository.getPersons());
   });
 
   test('should return a ServerFailure when don\'t succeed', () async {
-    // Arrange
-    when(repository.getPersons)
-        .thenAnswer((_) async => Left<Failure, PersonEntity>(ServerFailure()));
-    // Act
+    when(repository.getPersons).thenAnswer(
+        (_) async => Left<Failure, List<PersonEntity>>(ServerFailure()));
     final result = await usecase(tNoParams);
-    // Assert
     expect(result, Left(ServerFailure()));
     verify(() => repository.getPersons()).called(1);
   });

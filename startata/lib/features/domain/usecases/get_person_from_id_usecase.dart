@@ -4,13 +4,15 @@ import 'package:startata/core/usecase/usecase.dart';
 import 'package:startata/features/domain/domain.dart';
 import 'package:startata/features/domain/repositories/person_repository.dart';
 
-class GetPersonsUsecase implements Usecase<List<PersonEntity>, NoParams> {
+class GetPersonFromIdUsecase implements Usecase<PersonEntity, String> {
   final IPersonRepository repository;
 
-  GetPersonsUsecase(this.repository);
+  GetPersonFromIdUsecase(this.repository);
 
   @override
-  Future<Either<Failure, List<PersonEntity>>> call(NoParams params) async {
-    return await repository.getPersons();
+  Future<Either<Failure, PersonEntity>> call(String? id) async {
+    return id != null
+        ? await repository.getPersonFromId(id)
+        : Left(NullParamFailure());
   }
 }
