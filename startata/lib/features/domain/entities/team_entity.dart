@@ -12,5 +12,9 @@ class TeamEntity extends Equatable {
   });
 
   @override
-  List<Object?> get props => [id, label, index];
+  List<Object?> get props => [
+        id,
+        label,
+        index,
+      ];
 }

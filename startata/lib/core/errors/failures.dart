@@ -11,3 +11,13 @@ class NullParamFailure extends Failure {
   @override
   List<Object?> get props => [];
 }
+
+class UserNotFoundFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}
+
+class TeamNotFoundFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}

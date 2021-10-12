@@ -5,4 +5,5 @@ import 'package:startata/features/domain/domain.dart';
 abstract class IPersonRepository {
   Future<Either<Failure, List<PersonEntity>>> getPersons();
   Future<Either<Failure, PersonEntity>> getPersonFromId(String id);
+  Future<Either<Failure, PersonEntity>> getPersonFromEmail(String email);
 }
