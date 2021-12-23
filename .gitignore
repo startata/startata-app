@@ -21,8 +21,8 @@ doc/api/
 *.js.map
 
 
-**/ven/
-ven/
+**/backend/ven/
+backend/ven/
 
-**/venv/
-venv/
+**/backend/venv/
+backend/venv/

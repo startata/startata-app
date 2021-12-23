@@ -8,20 +8,20 @@ FastAPI is a modern, fast (high-performance), web framework for building APIs wi
 
 ## Features
 
-:black_square_button:   fazer login com e-mail e senha
-:black_square_button:   listar todos os usuários
-:black_square_button:   inserir vários reports a vários usuários de uma vez
-:black_square_button:   gerar um arquivo com a ata (.pdf)
-:black_square_button:   realizar o download desse arquivo
-:black_square_button:   listar receivers e-mails
-:black_square_button:   enviar um arquivo a um e-mail específico
+:black_square_button:   fazer login com e-mail e senha  <br />
+:black_square_button:   listar todos os usuários <br />
+:black_square_button:   inserir vários reports a vários usuários de uma vez <br />
+:black_square_button:   gerar um arquivo com a ata (.pdf) <br />
+:black_square_button:   realizar o download desse arquivo <br />
+:black_square_button:   listar receivers e-mails <br />
+:black_square_button:   enviar um arquivo a um e-mail específico <br />
+ <br />
 
-
-:black_square_button:   adicionar um receiver e-mail 
-:black_square_button:   obter reports de um usuário em uma data em específico
-:black_square_button:   inserir um report a um usuário em específico
-:black_square_button:   editar report passado de um usuário
-
+:black_square_button:   adicionar um receiver e-mail  <br />
+:black_square_button:   obter reports de um usuário em uma data em específico <br />
+:black_square_button:   inserir um report a um usuário em específico <br />
+:black_square_button:   editar report passado de um usuário <br />
+ <br />
 done	:white_check_mark: todo	:black_square_button:
 ## Preconditions:
 
@@ -36,6 +36,16 @@ git clone <link>
 ## Run local
 
 
+### Install VirtualEnv
+
+```
+virtualenv -p python3 venv
+```
+### Active VirtualEnv
+
+```
+. venv/bin/activate
+```
 ### Install dependencies
 
 ```
