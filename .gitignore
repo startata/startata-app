@@ -26,3 +26,5 @@ backend/ven/
 
 **/backend/venv/
 backend/venv/
+
+backend/pgdata/

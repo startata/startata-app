@@ -55,7 +55,7 @@ pip install -r requirements.txt
 ### Run server
 
 ```
-uvicorn app:app --reload
+uvicorn src.server:app --port 8080 --reload --reload-dir=src
 ```
 
 ## Run with docker
@@ -69,7 +69,7 @@ docker-compose up -d --build
 ## API documentation (provided by Swagger UI)
 
 ```
-http://127.0.0.1:8000/docs
+http://127.0.0.1:8080/docs
 ```
 
 ### Run server
