@@ -1,16 +1,17 @@
-import 'package:startata/core/errors/failures.dart';
-import 'package:dartz/dartz.dart';
 import 'package:startata/core/usecase/usecase.dart';
 import 'package:startata/features/domain/domain.dart';
 import 'package:startata/features/domain/repositories/person_repository.dart';
 
-class GetPersonFromEmailUseCase implements Usecase<PersonEntity, String> {
-  final IPersonRepository repository;
+class GetPersonFromEmailUseCase {
+  final IPersonRepository _repository;
 
-  GetPersonFromEmailUseCase(this.repository);
+  GetPersonFromEmailUseCase(this._repository);
 
-  @override
-  Future<Either<Failure, PersonEntity>> call(String email) {
-    return repository.getPersonFromEmail(email);
+  Future<PersonEntity> call(String email) {
+    // if (email.isValid()) {
+    //   throw InvalidParamFailure();
+    // }
+
+    return _repository.getPersonFromEmail(email);
   }
 }

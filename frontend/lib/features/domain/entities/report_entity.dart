@@ -1,8 +1,7 @@
-import 'package:equatable/equatable.dart';
 import 'package:startata/features/domain/entities/person_entity.dart';
 import 'package:startata/features/domain/entities/report_description_entity.dart';
 
-class ReportEntity extends Equatable {
+class ReportEntity {
   final PersonEntity person;
   final List<ReportDescriptionEntity> descriptions;
 
@@ -11,6 +10,9 @@ class ReportEntity extends Equatable {
     required this.descriptions,
   });
 
-  @override
-  List<Object?> get props => [person, descriptions];
+  bool isValid() =>
+      descriptions.isNotEmpty &&
+      descriptions.every(
+        (desc) => desc.isValid(),
+      );
 }

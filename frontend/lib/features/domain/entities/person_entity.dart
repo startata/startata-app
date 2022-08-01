@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import '../domain.dart';
 
-class PersonEntity extends Equatable {
+class PersonEntity {
   final String id;
   final String name;
   final String email;
@@ -16,13 +16,4 @@ class PersonEntity extends Equatable {
     required this.photoUrl,
     required this.team,
   });
-
-  @override
-  List<Object?> get props => [
-        id,
-        name,
-        email,
-        photoUrl,
-        team,
-      ];
 }

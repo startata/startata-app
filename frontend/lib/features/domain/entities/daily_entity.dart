@@ -1,21 +1,19 @@
-import 'package:equatable/equatable.dart';
 import 'package:startata/features/domain/domain.dart';
 
-class DailyEntity extends Equatable {
+class DailyEntity {
   final DateTime date;
-  final List<String> emailReciver;
+  final List<String> emailReceiver;
   final List<ReportEntity> reports;
 
   DailyEntity({
     required this.date,
-    required this.emailReciver,
+    required this.emailReceiver,
     required this.reports,
   });
 
-  @override
-  List<Object?> get props => [
-        date,
-        emailReciver,
-        reports,
-      ];
+  bool isValid() =>
+      reports.isNotEmpty &&
+      reports.every(
+        (desc) => desc.isValid(),
+      );
 }

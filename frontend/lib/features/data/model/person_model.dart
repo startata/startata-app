@@ -15,9 +15,7 @@ class PersonModel {
     required this.teamId,
   });
 
-  factory PersonModel.fromJson(
-          Map<String, dynamic> json, TeamEntity teamEntity) =>
-      PersonModel(
+  factory PersonModel.fromJson(Map<String, dynamic> json) => PersonModel(
         id: json['id'],
         name: json['name'],
         email: json['email'],

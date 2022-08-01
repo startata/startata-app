@@ -1,18 +1,17 @@
 import 'package:startata/core/errors/failures.dart';
-import 'package:dartz/dartz.dart';
-import 'package:startata/core/usecase/usecase.dart';
+
 import 'package:startata/features/domain/domain.dart';
 import 'package:startata/features/domain/repositories/person_repository.dart';
 
-class GetPersonFromIdUsecase implements Usecase<PersonEntity, String> {
-  final IPersonRepository repository;
+class GetPersonFromIdUsecase {
+  final IPersonRepository _repository;
 
-  GetPersonFromIdUsecase(this.repository);
+  GetPersonFromIdUsecase(this._repository);
 
-  @override
-  Future<Either<Failure, PersonEntity>> call(String? id) async {
-    return id != null
-        ? await repository.getPersonFromId(id)
-        : Left(NullParamFailure());
+  Future<PersonEntity> call(String? id) async {
+    if (id == null) {
+      throw NullParamFailure();
+    }
+    return await _repository.getPersonFromId(id);
   }
 }

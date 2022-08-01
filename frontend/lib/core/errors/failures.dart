@@ -1,23 +1,16 @@
-import 'package:equatable/equatable.dart';
+abstract class Failure {}
 
-abstract class Failure extends Equatable {}
+class ServerFailure extends Failure {}
 
-class ServerFailure extends Failure {
-  @override
-  List<Object?> get props => [];
+class NullParamFailure extends Failure {}
+
+class UserNotFoundFailure extends Failure {}
+
+class TeamNotFoundFailure extends Failure {}
+
+class EmptyPersonsFailure extends Failure {
+  final String message;
+  EmptyPersonsFailure(this.message);
 }
 
-class NullParamFailure extends Failure {
-  @override
-  List<Object?> get props => [];
-}
-
-class UserNotFoundFailure extends Failure {
-  @override
-  List<Object?> get props => [];
-}
-
-class TeamNotFoundFailure extends Failure {
-  @override
-  List<Object?> get props => [];
-}
+class InvalidDailyFailure extends Failure {}

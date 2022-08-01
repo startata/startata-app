@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-class ReportDescriptionEntity extends Equatable {
+class ReportDescriptionEntity {
   final DateTime date;
   final String description;
 
@@ -9,6 +7,5 @@ class ReportDescriptionEntity extends Equatable {
     required this.description,
   });
 
-  @override
-  List<Object?> get props => [date, description];
+  bool isValid() => description.isNotEmpty;
 }

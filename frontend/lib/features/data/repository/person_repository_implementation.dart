@@ -2,7 +2,7 @@ import 'package:startata/core/errors/exceptions.dart';
 import 'package:startata/features/data/datasource/person_datasource.dart';
 import 'package:startata/features/domain/entities/person_entity.dart';
 import 'package:startata/core/errors/failures.dart';
-import 'package:dartz/dartz.dart';
+import 'package:startata/features/domain/entities/team_entity.dart';
 import 'package:startata/features/domain/repositories/person_repository.dart';
 import 'package:startata/features/domain/repositories/team_repository.dart';
 
@@ -13,7 +13,7 @@ class PersonRepositoryImplementation extends IPersonRepository {
   PersonRepositoryImplementation(this.datasource, this.teamRepository);
 
   @override
-  Future<Either<Failure, PersonEntity>> getPersonFromEmail(String email) async {
+  Future<PersonEntity> getPersonFromEmail(String email) async {
     try {
       final personModel = await datasource.getPersonFromEmail(email);
 
@@ -21,45 +21,68 @@ class PersonRepositoryImplementation extends IPersonRepository {
         personModel.teamId,
       ); //TODO Rever o tratamento dessa Either
 
-      final team = teamEither.fold(
-        (failure) => throw (failure),
-        (team) => team,
-      );
+      // final team = teamEither.fold(
+      //   (failure) => throw (failure),
+      //   (team) => team,
+      // );
 
-      return Right(personModel.toEntity(team));
+      // return personModel.toEntity(team);
+      return personModel.toEntity(teamEither);
     } on DataNotFoundExeption {
-      return Left(UserNotFoundFailure());
+      throw UserNotFoundFailure();
     } catch (e) {
       if (e is Failure) {
-        return Left(e);
+        throw e;
       }
-      return Left(ServerFailure());
+      throw ServerFailure();
     }
   }
 
   @override
-  Future<Either<Failure, PersonEntity>> getPersonFromId(String id) async {
+  Future<PersonEntity> getPersonFromId(String id) async {
     try {
       final result = await datasource.getPersonFromEmail(id);
 
       final teamEither = await teamRepository.getTeamFromId(
         result.teamId,
       );
-      final team = teamEither.fold(
-        (failure) => throw (failure),
-        (team) => team,
-      );
-      return Right(result.toEntity(team));
+      // final team = teamEither.fold(
+      //   (failure) => throw (failure),
+      //   (team) => team,
+      // );
+      // return result.toEntity(team);
+      return result.toEntity(teamEither);
     } on DataNotFoundExeption {
-      return Left(UserNotFoundFailure());
+      throw UserNotFoundFailure();
     } catch (e) {
-      return Left(ServerFailure());
+      throw ServerFailure();
     }
   }
 
   @override
-  Future<Either<Failure, List<PersonEntity>>> getPersons() {
-    // TODO: implement getPersons
-    throw UnimplementedError();
+  Future<List<PersonEntity>> getPersons() async {
+    try {
+      final result = await datasource.list();
+
+      final personsList = await Future.wait(result.map((personModel) async {
+        // final teamEither = await teamRepository.getTeamFromId(
+        //   personModel.teamId,
+        // );
+        // final team = teamEither.fold(
+        //   (failure) => throw (failure),
+        //   (team) => team,
+        // );
+        // return personModel.toEntity(team);
+        return personModel.toEntity(
+          TeamEntity(id: '123', label: 'marketing', index: 2),
+        );
+      }).toList());
+
+      return personsList;
+    } on DataNotFoundExeption {
+      throw UserNotFoundFailure();
+    } catch (e) {
+      throw ServerFailure();
+    }
   }
 }

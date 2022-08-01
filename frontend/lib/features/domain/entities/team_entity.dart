@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-class TeamEntity extends Equatable {
+class TeamEntity {
   final String id;
   final String label;
   final int index;
@@ -10,11 +8,4 @@ class TeamEntity extends Equatable {
     required this.label,
     required this.index,
   });
-
-  @override
-  List<Object?> get props => [
-        id,
-        label,
-        index,
-      ];
 }

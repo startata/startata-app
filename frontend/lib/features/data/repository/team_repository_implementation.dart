@@ -11,14 +11,14 @@ class TeamRepositoryImplementation implements ITeamRepository {
   TeamRepositoryImplementation(this.datasource);
 
   @override
-  Future<Either<Failure, TeamEntity>> getTeamFromId(String id) async {
+  Future<TeamEntity> getTeamFromId(String id) async {
     try {
       final result = await datasource.getTeamById(id);
-      return (Right(result.toEntity()));
+      return result.toEntity();
     } on DataNotFoundExeption {
-      return Left(TeamNotFoundFailure());
+      throw TeamNotFoundFailure();
     } catch (e) {
-      return Left(ServerFailure());
+      throw ServerFailure();
     }
   }
 }
